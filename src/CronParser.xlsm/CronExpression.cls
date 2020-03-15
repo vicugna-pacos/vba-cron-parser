@@ -105,13 +105,41 @@ Private Sub ParseField(field As String, fieldIndex As Integer)
     ' 別名を置き換える
     result = ReplaceAlias(result, fieldIndex)
     
-    ' リスト(,)のパース
-    fields(fieldIndex) = ParseList(result)
+    fields(fieldIndex) = result
     
+    ' パースメソッドの時点では、ほとんどパースを行わない。
+    ' L, #, Wなど、設定値では日付等を確定できない特殊文字があるため。
     
 End Sub
 
+' 指定した日に実行する時刻のリストを取得する
+Public Function GetExecutesByDay(dt As Date) As Date()
+
+End Function
+
+' 指定した日時の次に実行する日時を取得する
+'
+' 引数：
+'   dt - 基準日時。この次に実行するタイミングを取得できる。
+' 戻り値：次の実行時刻。取得できない場合は「1900/01/01」を返す。
+Public Function GetNext(dt As Date) As Date
+    If IsError Then
+        GetNext = #1/1/1900#
+        Exit Function
+    End If
+    
+    
+    
+    
+End Function
+
+
+
 ' リスト(,)のパース
+'
+' 引数：
+'   source - パース前の文字列
+' 戻り値：パース後の文字列
 Private Function ParseList(source As String) As String
     Dim atoms() As String
     Dim i As Integer
@@ -236,3 +264,4 @@ Private Function CheckDayAndWeek(dayStr As String, weekStr As String) As Boolean
         CheckDayAndWeek = False
     End If
 End Function
+
